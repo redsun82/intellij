@@ -64,12 +64,7 @@ public class BlazeQueryDirectoryToTargetProvider implements DirectoryToTargetPro
     }
 
     // exclude 'manual' targets, which shouldn't be built when expanding wildcard target patterns
-    if (SystemInfo.isWindows) {
-      // TODO(b/201974254): Windows support for Bazel sync (see
-      // https://github.com/bazelbuild/intellij/issues/113).
-      return String.format("attr('tags', '^((?!manual).)*$', %s)", targets);
-    }
-    return String.format("attr(\"tags\", \"^((?!manual).)*$\", %s)", targets);
+    return String.format("attr(\"tags\", '^((?!manual).)*$', %s)", targets);
   }
 
   /**
