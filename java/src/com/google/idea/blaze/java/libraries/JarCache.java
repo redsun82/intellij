@@ -272,13 +272,7 @@ public class JarCache {
         newOutputs.put(cacheKeyForSourceJar(srcJar), srcJar);
       }
     }
-
-    BlazeLibraryCollector.getLintLibraries(projectViewSet, projectData).stream()
-        .filter(library -> library instanceof BlazeJarLibrary)
-        .map(
-            library ->
-                decoder.resolveOutput(
-                    ((BlazeJarLibrary) library).libraryArtifact.jarForIntellijLibrary()))
+    JavaLintCollector.collectLintJarsArtifacts(projectData).stream()
         .forEach(jar -> newOutputs.put(cacheKeyForJar(jar), jar));
 
     return ImmutableMap.copyOf(newOutputs);
@@ -361,8 +355,12 @@ public class JarCache {
    */
   @Nullable
   public File getCachedJar(ArtifactLocationDecoder decoder, BlazeJarLibrary library) {
-    boolean enabled = isEnabled();
     BlazeArtifact artifact = decoder.resolveOutput(library.libraryArtifact.jarForIntellijLibrary());
+    return getCachedJar(artifact);
+  }
+
+  public File getCachedJar(BlazeArtifact artifact) {
+    boolean enabled = isEnabled();
     if (!enabled) {
       return getFallbackFile(artifact);
     }
