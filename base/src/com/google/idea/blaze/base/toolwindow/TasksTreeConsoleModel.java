@@ -15,6 +15,8 @@
  */
 package com.google.idea.blaze.base.toolwindow;
 
+import com.google.idea.blaze.base.console.BlazeConsoleExperimentManager;
+import com.google.idea.common.util.MorePlatformUtils;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +24,10 @@ import java.util.Queue;
 
 /** Model for the combination of the tree and output consoles. */
 final class TasksTreeConsoleModel {
-  static final int MAX_FINISHED_TASKS = 10;
+  static final int MAX_FINISHED_TASKS =
+      MorePlatformUtils.isAndroidStudio() && !BlazeConsoleExperimentManager.isTasksHistoryEnabled()
+          ? 1
+          : 10;
 
   private final TasksTreeModel treeModel = new TasksTreeModel();
   private final Map<Task, ConsoleView> consolesOfTasks = new HashMap<>();
