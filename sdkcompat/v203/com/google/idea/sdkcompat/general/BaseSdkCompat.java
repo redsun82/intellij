@@ -116,6 +116,7 @@ public final class BaseSdkCompat {
   public static ImmutableList<String> getKotlinProducers() {
     return ImmutableList.of(
         "org.jetbrains.kotlin.idea.run.KotlinJUnitRunConfigurationProducer",
+        "org.jetbrains.kotlin.idea.run.KotlinJvmTestClassGradleConfigurationProducer",
         "org.jetbrains.kotlin.idea.run.KotlinPatternConfigurationProducer",
         "org.jetbrains.kotlin.idea.run.KotlinRunConfigurationProducer",
         "org.jetbrains.kotlin.idea.run.KotlinTestClassGradleConfigurationProducer",

@@ -117,6 +117,7 @@ public final class BaseSdkCompat {
     return ImmutableList.of(
         "org.jetbrains.kotlin.idea.run.KotlinJUnitRunConfigurationProducer",
         "org.jetbrains.kotlin.idea.run.KotlinPatternConfigurationProducer",
+        "org.jetbrains.kotlin.idea.run.KotlinJvmTestClassGradleConfigurationProducer",
         "org.jetbrains.kotlin.idea.run.KotlinRunConfigurationProducer",
         "org.jetbrains.kotlin.idea.run.KotlinTestClassGradleConfigurationProducer",
         "org.jetbrains.kotlin.idea.run.KotlinTestMethodGradleConfigurationProducer");

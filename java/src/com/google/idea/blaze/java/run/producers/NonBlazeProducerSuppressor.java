@@ -68,7 +68,7 @@ public class NonBlazeProducerSuppressor implements StartupActivity {
     }
   }
 
-  private static void suppressProducers(Project project) {
+  static void suppressProducers(Project project) {
     RunConfigurationProducerService producerService =
         RunConfigurationProducerService.getInstance(project);
     producerService.getState().ignoredProducers.addAll(JAVA_PRODUCERS);
