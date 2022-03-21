@@ -372,12 +372,6 @@ public final class BlazeConfigurationToolchainResolver {
       File executionRoot,
       File cppExecutable,
       String compilerVersion) {
-    File compilerWrapper =
-        CompilerWrapperProvider.getInstance()
-            .createCompilerExecutableWrapper(executionRoot, cppExecutable);
-    if (compilerWrapper == null) {
-      return null;
-    }
     ImmutableList.Builder<String> cFlagsBuilder = ImmutableList.builder();
     cFlagsBuilder.addAll(toolchainIdeInfo.getcCompilerOptions());
 
@@ -385,8 +379,8 @@ public final class BlazeConfigurationToolchainResolver {
     cppFlagsBuilder.addAll(toolchainIdeInfo.getCppCompilerOptions());
     return new BlazeCompilerSettings(
         project,
-        compilerWrapper,
-        compilerWrapper,
+        cppExecutable,
+        cppExecutable,
         cFlagsBuilder.build(),
         cppFlagsBuilder.build(),
         compilerVersion);

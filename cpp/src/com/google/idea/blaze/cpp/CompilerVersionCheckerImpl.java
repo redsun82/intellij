@@ -38,7 +38,7 @@ public class CompilerVersionCheckerImpl implements CompilerVersionChecker {
         ExternalTask.builder(executionRoot)
             .args(cppExecutable.toString())
             // NOTE: this won't work with MSVC if we ever support that (check CToolchainIdeInfo?)
-            .args("--version")
+            .args("/?")
             .stdout(outputStream)
             .stderr(errStream)
             .build()
@@ -48,6 +48,6 @@ public class CompilerVersionCheckerImpl implements CompilerVersionChecker {
           IssueKind.GENERIC_FAILURE,
           String.format("stderr: \"%s\"\nstdout: \"%s\"", errStream, outputStream));
     }
-    return outputStream.toString();
+    return errStream.toString();
   }
 }
