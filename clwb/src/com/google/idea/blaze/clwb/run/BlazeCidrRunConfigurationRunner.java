@@ -112,8 +112,8 @@ public class BlazeCidrRunConfigurationRunner implements BlazeCommandRunConfigura
         extraDebugFlags =
             ImmutableList.of(
                 "--compilation_mode=dbg",
-                "--copt=-O0",
-                "--copt=-g",
+                "--copt=/Od",
+                "--copt=/Z7",
                 "--strip=never",
                 "--dynamic_mode=off",
                 "--fission=yes");
