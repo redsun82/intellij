@@ -36,11 +36,17 @@
       class="com.google.idea.blaze.base.sync.actions.IncrementalSyncProjectAction"
       text="Sync Project with BUILD Files"
       icon="BlazeIcons.Logo">
+      <keyboard-shortcut
+          keymap="$default"
+          first-keystroke="alt Y"/>
     </action>
     <action id="Blaze.FullSyncProject"
       class="com.google.idea.blaze.base.sync.actions.FullSyncProjectAction"
       text="Non-Incrementally Sync Project with BUILD Files"
       icon="BlazeIcons.BlazeSlow">
+      <keyboard-shortcut
+          keymap="$default"
+          first-keystroke="alt shift Y"/>
     </action>
     <action id="Blaze.SyncWorkingSet"
       class="com.google.idea.blaze.base.sync.actions.SyncWorkingSetAction"
@@ -292,6 +298,8 @@
         order="first"/>
     <consoleFilterProvider implementation="com.google.idea.blaze.base.run.filter.GenericFileMessageFilter$Provider"/>
     <consoleFilterProvider implementation="com.google.idea.blaze.base.run.filter.TestLogFilter$Provider"/>
+    <!-- Add target filter last, so it doesn't override other links containing a target string.-->
+    <consoleFilterProvider implementation="com.google.idea.blaze.base.run.filter.BlazeTargetFilter$Provider" order="last"/>
     <codeInsight.lineMarkerProvider
         language="BUILD"
         implementationClass="com.google.idea.blaze.base.query.MacroLineMarkerProvider"/>
@@ -331,7 +339,6 @@
     <referencesSearch implementation="com.google.idea.blaze.base.lang.buildfile.search.GlobReferenceSearcher"/>
     <readWriteAccessDetector implementation="com.google.idea.blaze.base.lang.buildfile.findusages.BuildReadWriteAccessDetector"/>
     <elementDescriptionProvider implementation="com.google.idea.blaze.base.lang.buildfile.findusages.BuildElementDescriptionProvider"/>
-    <usageGroupingRuleProvider implementation="com.google.idea.blaze.base.lang.buildfile.findusages.UsageGroupingRuleProviderOverride" order="first"/>
     <targetElementEvaluator language="BUILD" implementationClass="com.google.idea.blaze.base.lang.buildfile.findusages.BuildTargetElementEvaluator"/>
     <quoteHandler fileType="BUILD" className="com.google.idea.blaze.base.lang.buildfile.editor.BuildQuoteHandler"/>
     <enterHandlerDelegate implementation="com.google.idea.blaze.base.lang.buildfile.editor.BuildEnterBetweenBracketsHandler" order="before EnterBetweenBracesHandler"/>
@@ -397,9 +404,6 @@
     </component>
     <component>
       <implementation-class>com.google.idea.blaze.base.prefetch.PrefetchProjectInitializer</implementation-class>
-    </component>
-    <component>
-      <implementation-class>com.google.idea.blaze.base.lang.buildfile.findusages.UsageGroupingRuleProviderOverride</implementation-class>
     </component>
   </application-components>
 
@@ -468,6 +472,7 @@
     <extensionPoint qualifiedName="com.google.idea.blaze.CustomFormatter" interface="com.google.idea.blaze.base.formatter.CustomFormatter"/>
     <extensionPoint qualifiedName="com.google.idea.blaze.OutputGroupsProvider" interface="com.google.idea.blaze.base.sync.aspects.strategy.OutputGroupsProvider"/>
     <extensionPoint qualifiedName="com.google.idea.blaze.ExperimentLoader" interface="com.google.idea.common.experiments.ExperimentLoader"/>
+    <extensionPoint qualifiedName="com.google.idea.blaze.EmptyLibraryFilterSettings" interface="com.google.idea.blaze.java.sync.importer.emptylibrary.EmptyLibraryFilterSettings" />
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.google.idea.blaze">
